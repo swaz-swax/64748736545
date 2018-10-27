@@ -1,19 +1,24 @@
 package com.capg.project.bank.ui;
 
 import java.util.Scanner;
+
+
+
 import com.capg.project.bank.bean.Customer;
-import com.capg.project.bank.exception.AccountNotFound;
+import com.capg.project.bank.exception.AccountException;
 import com.capg.project.bank.service.CustomerServiceImp;
+import com.capg.project.bank.service.ICustomerService;
 
 public class User {
 
-	public static void main(String[] args) 
+	public static void main(String[] args) throws AccountException
 	{
 		while (true) 
 		{
 			Scanner scanner = new Scanner(System.in);
 			Customer bean = new Customer();
 			CustomerServiceImp service=new CustomerServiceImp();
+			
 			long accountNumber;
 			int pin;
 
@@ -41,37 +46,80 @@ public class User {
 				
 				do 
 				{
-					System.out.print("\nEnter your name: ");
+					System.out.print("\nEnter your name(InitCaps): ");
 					String name = scanner.next();
-					bean.setName(name);
+					if(service.validateName(name))
+					{
+						bean.setName(name);	
+					}
+					else
+					{
+						System.err.println("Invalid... Only InitCaps allowed !!!");
+						temp=false;
+					}
+					
 				} while (temp == false);
 
 				do 
 				{
-					System.out.print("\nEnter your Mobile Number: ");
-					int phoneNumber = scanner.nextInt();
-					bean.setPhoneNumber(phoneNumber);
+					System.out.print("\nEnter your Mobile Number (10digits): ");
+					String phoneNumber = scanner.next();
+					if(service.validatePhoneNumber(phoneNumber))
+					{
+						bean.setPhoneNumber(phoneNumber);
+					}
+					else
+					{
+						System.err.println("Invalid... Only 10 digits allowed!!!");
+						temp=false;
+					}
 				} while (temp == false);
 
 				do 
 				{
-					System.out.print("\nEnter your Address: ");
+					System.out.print("\nEnter your Address(9 Shjuh yugu): ");
 					String address = scanner.next();
-					bean.setAddress(address);
+					if(service.validateAddress(address))
+					{
+						bean.setAddress(address);
+					}
+					
+					else
+					{
+						System.err.println("Invalid Address [format: digits String String]...!!!");
+						temp=false;
+					}
 				} while (temp == false);
 
 				do 
 				{
-					System.out.print("\nEnter your PAN number: ");
+					System.out.print("\nEnter your PAN number(alphanumeric 7): ");
 					String panNumber = scanner.next();
-					bean.setPanNumber(panNumber);
+					if(service.validatePAN(panNumber))
+					{
+						bean.setPanNumber(panNumber);
+					}
+					else
+					{
+						System.err.println("Invalid... 7 alphanumerics allowed !!!");
+						temp=false;
+					}
 				} while (temp == false);
 
 				do 
 				{
-					System.out.print("\nEnter your Aadhar number: ");
+					System.out.print("\nEnter your Aadhar number(16 digits): ");
 					String governmentID = scanner.next();
-					bean.setGovernmentID(governmentID);
+					if(service.validateAadhar(governmentID))
+					{
+						bean.setGovernmentID(governmentID);
+					}
+					else
+					{
+						System.err.println("Invalid... 16 digits allowed !!!");
+						temp=false;
+					}
+					
 				} while (temp == false);
 
 				double a = Math.random() * Math.pow(10, 5);
@@ -88,9 +136,9 @@ public class User {
 				System.out.println("bean "+bean);
 				boolean isAdded=service.createAccount(accountNumber,bean);
 				
-				if(isAdded){
+				if(isAdded)
+				{
 					System.err.print("\n\nAccount created successfully...\n");
-					//System.out.println(bean);
 				}
 				else
 				{
@@ -116,10 +164,10 @@ public class User {
 				{
 					try 
 					{
-						throw new AccountNotFound();
+						throw new AccountException();
 	
 					} 
-					catch (AccountNotFound e)
+					catch (AccountException e)
 					{
 
 						e.getMessage();
@@ -136,7 +184,23 @@ public class User {
 				System.out.print("\nEnter depositing amount: ");
 				double dAmount=scanner.nextDouble();
 				
-				service.deposit(accountNumber, pin, dAmount);
+				boolean isDeposited =	service.deposit(accountNumber, pin, dAmount);
+				if(isDeposited)
+				{ System.out.println("Rs."+dAmount+" is Deposited.");
+				}
+				else
+				{
+					try 
+					{
+						throw new AccountException();
+	
+					} 
+					catch (AccountException e)
+					{
+
+						e.getMessage();
+					}
+				}
 				break;
 
 			case 4: 
@@ -148,7 +212,14 @@ public class User {
 				System.out.print("\nEnter withdraw amount: ");
 				double wAmount = scanner.nextDouble();
 				
-				service.withdraw(accountNumber, pin, wAmount);
+				boolean isWithdrawn =service.withdraw(accountNumber, pin, wAmount);
+				if(isWithdrawn)
+				{ System.out.println("Rs."+wAmount+" is Withdrawn.");
+				}
+				else
+				{
+					
+				}
 				
 				break;
 
@@ -164,8 +235,14 @@ public class User {
 				System.out.print("\nEnter the amount to transfer: ");
 				dAmount=scanner.nextDouble();
 				
-				service.fundTransfer(accountNumber1, pin, accountNumber2, dAmount);
-				
+				boolean isTransferred = service.fundTransfer(accountNumber1, pin, accountNumber2, dAmount);
+				if(isTransferred)
+				{ System.out.println("Rs."+dAmount+" is Transferred from "+accountNumber1+" to "+accountNumber2);
+				}
+				else
+				{
+					throw new AccountException();
+				}
 				break;
 
 			case 6:
@@ -176,7 +253,10 @@ public class User {
 				System.out.print("\nEnter PIN: ");
 				pin = scanner.nextInt();
 				
+				System.out.println("\n\n Date\t   Time\t  A/C No.\t\tDetails\t\t\t\t\t\t\tBal");
+				System.out.println("-----------------------------------------------------------------------------------------------------");
 				service.printTansaction(accountNumber, pin);
+				System.out.println("-----------------------------------------------------------------------------------------------------");
 				break;
 				
 			case 7:

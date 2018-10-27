@@ -4,12 +4,11 @@ public class Customer
 {
 	 private long accountNumber;
 	 private String name;
-	 private int phoneNumber;
+	 private String phoneNumber;
 	 private String panNumber;
 	 private String address;
 	 private String governmentID;
 	 private int pin;
-	 private int cpin;
 	 private double balance;
 
 		public Customer() {
@@ -17,9 +16,8 @@ public class Customer
 		}
 
 	 
-	public Customer(long accountNumber, String name, int phoneNumber, String panNumber,
-			String address, String governmentID, int pin,
-			int cpin) 
+	public Customer(long accountNumber, String name, String phoneNumber, String panNumber,
+			String address, String governmentID, int pin, double balance) 
 	{
 		super();
 		this.accountNumber = accountNumber;
@@ -29,8 +27,7 @@ public class Customer
 		this.address = address;
 		this.governmentID = governmentID;
 		this.pin = pin;
-		this.cpin = cpin;
-		this.balance=balance;
+		this.balance = balance;
 	}
 	
 
@@ -48,10 +45,10 @@ public class Customer
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
-	public void setPhoneNumber(int phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 	public String getPanNumber() {
@@ -73,12 +70,6 @@ public class Customer
 		this.governmentID = governmentID;
 	}
 	
-	public int getCpin() {
-		return cpin;
-	}
-	public void setCpin(int cpin) {
-		this.cpin = cpin;
-	}
 	public int getPin() {
 		return pin;
 	}
@@ -90,7 +81,6 @@ public class Customer
 	public double getBalance() {
 		return balance;
 	}
-
 
 	public void setBalance(double balance) {
 		this.balance = balance;
