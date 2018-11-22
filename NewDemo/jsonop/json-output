@@ -1,0 +1,148 @@
+[
+  {
+    "comments": [
+      {
+        "line": 1,
+        "value": "#Author: Swarup Talukdar"
+      }
+    ],
+    "line": 2,
+    "elements": [
+      {
+        "line": 6,
+        "name": "User Login Successful",
+        "description": "",
+        "id": "user-login;user-login-successful",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 93449609,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "entered valid user and pass",
+            "match": {
+              "location": "Stepdef.entered_valid_user_and_pass()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 68095,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "navigate to login successful page",
+            "match": {
+              "location": "Stepdef.navigate_to_login_successful_page()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "line": 10,
+        "name": "User Login Unsuccessful",
+        "description": "",
+        "id": "user-login;user-login-unsuccessful",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 41841,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "entered invalid user and pass",
+            "match": {
+              "location": "Stepdef.entered_invalid_user_and_pass()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 33637,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "navigate to error page",
+            "match": {
+              "location": "Stepdef.navigate_to_error_page()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "User Login",
+    "description": "For valid username and password navigate to main page",
+    "id": "user-login",
+    "keyword": "Feature",
+    "uri": "com/cg/trg/resources/login.feature"
+  },
+  {
+    "comments": [
+      {
+        "line": 1,
+        "value": "#Author: Swarup Talukdar"
+      }
+    ],
+    "line": 2,
+    "elements": [
+      {
+        "line": 5,
+        "name": "Register Successful",
+        "description": "",
+        "id": "register;register-successful",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 44713,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I entered user and pass",
+            "match": {
+              "location": "Stepdef.i_entered_user_and_pass()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 50046,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "I entered mobile and email",
+            "match": {
+              "location": "Stepdef.i_entered_mobile_and_email()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 34458,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "User should be registered successfully",
+            "match": {
+              "location": "Stepdef.user_should_be_registered_successfully()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "Register",
+    "description": "For registered user navigate to main page",
+    "id": "register",
+    "keyword": "Feature",
+    "uri": "com/cg/trg/resources/register.feature"
+  }
+]
